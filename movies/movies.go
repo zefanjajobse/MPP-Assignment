@@ -6,10 +6,10 @@ import (
 )
 
 type Movie struct {
-	IMDb_id string
-	Title   string
-	Rating  float64
-	Year    int64
+	IMDb_id string  `json:"imdb_id"`
+	Title   string  `json:"title"`
+	Rating  float64 `json:"rating"`
+	Year    int64   `json:"year"`
 }
 
 type MovieDb struct {
@@ -35,6 +35,24 @@ func (c *MovieDb) AllTitles() ([]string, error) {
 		var name string
 		err := rows.Scan(&name)
 		res = append(res, name)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return res, nil
+}
+
+func (c *MovieDb) All() ([]Movie, error) {
+	res := []Movie{}
+	rows, err := c.Conn.Query("SELECT * FROM movies")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var movie Movie
+		err := rows.Scan(&movie.IMDb_id, &movie.Title, &movie.Rating, &movie.Year)
+		res = append(res, movie)
 		if err != nil {
 			return nil, err
 		}
