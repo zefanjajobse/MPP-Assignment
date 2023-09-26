@@ -46,8 +46,7 @@ func Start(movieDb movies.MovieDb, arguments []string) {
 	case "summaries":
 		res, err := movieDb.AllIds()
 		checkError(err)
-		// TODO: change back to :25
-		usedResults := res[:10]
+		usedResults := res[:25]
 
 		numJobs := len(usedResults)
 		results := make(chan int, numJobs)
@@ -58,6 +57,7 @@ func Start(movieDb movies.MovieDb, arguments []string) {
 		for a := 1; a <= numJobs; a++ {
 			<-results
 		}
+		fmt.Println("Summaries added")
 	}
 
 	movieDb.Conn.Close()

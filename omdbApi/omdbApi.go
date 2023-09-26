@@ -3,7 +3,6 @@ package omdbapi
 import (
 	"assignment1/movies"
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -70,17 +69,17 @@ func Get(movieId string) (Response, error) {
 }
 
 func Worker(movieDb movies.MovieDb, id int, movieId string, results chan<- int) {
-	fmt.Printf("Worker %d getting summary for %s\n", id, movieId)
+	// fmt.Printf("Worker %d getting summary for %s\n", id, movieId)
 	res, err := Get(movieId)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Worker %d received summary for %s\n", id, movieId)
+	// fmt.Printf("Worker %d received summary for %s\n", id, movieId)
 
 	err = movieDb.UpdateSummary(movieId, res.Plot)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Wrote summary for %s to database\n", movieId)
+	// fmt.Printf("Wrote summary for %s to database\n", movieId)
 	results <- 1
 }

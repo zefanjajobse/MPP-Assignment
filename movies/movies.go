@@ -90,7 +90,7 @@ func (c *MovieDb) FindOne(id string) (Movie, error) {
 }
 
 func (c *MovieDb) Insert(movie Movie) (Movie, error) {
-	res, err := c.Conn.Exec("INSERT INTO movies VALUES(?,?,?,?);", movie.IMDb_id, movie.Title, movie.Rating, movie.Year)
+	res, err := c.Conn.Exec("INSERT INTO movies VALUES(?,?,?,?,?);", movie.IMDb_id, movie.Title, movie.Rating, movie.Year, nil)
 	if err != nil {
 		return Movie{}, err
 	}
