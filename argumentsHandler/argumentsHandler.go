@@ -44,14 +44,20 @@ func Start(movieDb movies.MovieDb, arguments []string) {
 		deleteCommand.Parse(arguments[1:])
 		movieDb.Delete(*deleteImdbId)
 	case "summaries":
-		// res, err := movieDb.AllIds()
-		// checkError(err)
-		// // fmt.Println(len(res[:10]))
-		// for _, value := range res[:10] {
-		// 	fmt.Println(value)
-		// }
-		omdbapi.Get("tt0449088")
+		res, err := movieDb.AllIds()
+		checkError(err)
+		// TODO: change back to :25
+		usedResults := res[:10]
 
+		numJobs := len(usedResults)
+		results := make(chan int, numJobs)
+		for index, value := range usedResults {
+			go omdbapi.Worker(movieDb, index, value, results)
+		}
+
+		for a := 1; a <= numJobs; a++ {
+			<-results
+		}
 	}
 
 	movieDb.Conn.Close()

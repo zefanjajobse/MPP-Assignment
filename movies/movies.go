@@ -103,6 +103,20 @@ func (c *MovieDb) Insert(movie Movie) (Movie, error) {
 	return movie, nil
 }
 
+func (c *MovieDb) UpdateSummary(id string, summary string) error {
+	res, err := c.Conn.Exec("UPDATE movies SET Plot_summary=? WHERE IMDb_id=?", summary, id)
+	if err != nil {
+		return err
+	}
+
+	_, err = res.RowsAffected()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (c *MovieDb) Delete(id string) error {
 	res, err := c.Conn.Exec("DELETE FROM movies WHERE IMDb_id=?", id)
 	if err != nil {
