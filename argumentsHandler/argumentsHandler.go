@@ -2,6 +2,7 @@ package argumentshandler
 
 import (
 	"assignment1/movies"
+	omdbapi "assignment1/omdbApi"
 	"flag"
 	"fmt"
 	"log"
@@ -42,6 +43,15 @@ func Start(movieDb movies.MovieDb, arguments []string) {
 	case "delete":
 		deleteCommand.Parse(arguments[1:])
 		movieDb.Delete(*deleteImdbId)
+	case "summaries":
+		// res, err := movieDb.AllIds()
+		// checkError(err)
+		// // fmt.Println(len(res[:10]))
+		// for _, value := range res[:10] {
+		// 	fmt.Println(value)
+		// }
+		omdbapi.Get("tt0449088")
+
 	}
 
 	movieDb.Conn.Close()

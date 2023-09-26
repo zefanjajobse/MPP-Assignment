@@ -6,10 +6,11 @@ import (
 )
 
 type Movie struct {
-	IMDb_id string  `json:"imdb_id"`
-	Title   string  `json:"title"`
-	Rating  float64 `json:"rating"`
-	Year    int64   `json:"year"`
+	IMDb_id      string         `json:"imdb_id"`
+	Title        string         `json:"title"`
+	Rating       float64        `json:"rating"`
+	Year         int64          `json:"year"`
+	Plot_summary sql.NullString `json:"-"`
 }
 
 type MovieDb struct {
@@ -42,6 +43,24 @@ func (c *MovieDb) AllTitles() ([]string, error) {
 	return res, nil
 }
 
+func (c *MovieDb) AllIds() ([]string, error) {
+	res := []string{}
+	rows, err := c.Conn.Query("SELECT IMDb_id FROM movies")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var IMDb_id string
+		err := rows.Scan(&IMDb_id)
+		res = append(res, IMDb_id)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return res, nil
+}
+
 func (c *MovieDb) All() ([]Movie, error) {
 	res := []Movie{}
 	rows, err := c.Conn.Query("SELECT * FROM movies")
@@ -51,7 +70,7 @@ func (c *MovieDb) All() ([]Movie, error) {
 	defer rows.Close()
 	for rows.Next() {
 		var movie Movie
-		err := rows.Scan(&movie.IMDb_id, &movie.Title, &movie.Rating, &movie.Year)
+		err := rows.Scan(&movie.IMDb_id, &movie.Title, &movie.Rating, &movie.Year, &movie.Plot_summary)
 		res = append(res, movie)
 		if err != nil {
 			return nil, err
@@ -61,9 +80,9 @@ func (c *MovieDb) All() ([]Movie, error) {
 }
 
 func (c *MovieDb) FindOne(id string) (Movie, error) {
-	row := c.Conn.QueryRow("SELECT * FROM movies WHERE IMDb_id=?", id, 4)
+	row := c.Conn.QueryRow("SELECT * FROM movies WHERE IMDb_id=?", id, 5)
 	movie := Movie{}
-	err := row.Scan(&movie.IMDb_id, &movie.Title, &movie.Rating, &movie.Year)
+	err := row.Scan(&movie.IMDb_id, &movie.Title, &movie.Rating, &movie.Year, &movie.Plot_summary)
 	if err != nil {
 		return Movie{}, err
 	}
