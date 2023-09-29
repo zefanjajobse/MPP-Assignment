@@ -24,7 +24,7 @@ func StartRestApi(movieDb movies.MovieDb) {
 		res, err := movieDb.FindOne(context.Param("id"))
 
 		if err != nil {
-			context.JSON(http.StatusNoContent, gin.H{"error": err.Error()})
+			context.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 			return
 		}
 
