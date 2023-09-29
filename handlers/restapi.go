@@ -2,6 +2,7 @@ package handlers
 
 import (
 	movies "assignment1/connectors"
+	"assignment1/structs"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -30,7 +31,7 @@ func StartRestApi(movieDb movies.MovieDb) {
 		context.JSON(http.StatusOK, res)
 	})
 	router.POST("/movies", func(context *gin.Context) {
-		var json movies.Movie
+		var json structs.Movie
 		if err := context.ShouldBindJSON(&json); err != nil {
 			context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return

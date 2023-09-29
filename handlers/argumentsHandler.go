@@ -3,6 +3,7 @@ package handlers
 import (
 	movies "assignment1/connectors"
 	omdbapi "assignment1/connectors"
+	"assignment1/structs"
 	"flag"
 	"fmt"
 	"log"
@@ -25,7 +26,7 @@ func StartArguments(movieDb movies.MovieDb, arguments []string) {
 	switch arguments[0] {
 	case "add":
 		addCommand.Parse(arguments[1:])
-		movie, err := movieDb.Insert(movies.Movie{IMDb_id: *addImdbId, Title: *addTitle, Rating: *addImdbRating, Year: int64(*addYear)})
+		movie, err := movieDb.Insert(structs.Movie{IMDb_id: *addImdbId, Title: *addTitle, Rating: *addImdbRating, Year: int64(*addYear)})
 
 		checkError(err)
 		movie.PrintInfo()

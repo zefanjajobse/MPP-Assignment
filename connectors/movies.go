@@ -1,17 +1,10 @@
 package connectors
 
 import (
+	"assignment1/structs"
 	"database/sql"
 	"fmt"
 )
-
-type Movie struct {
-	IMDb_id      string         `json:"imdb_id"`
-	Title        string         `json:"title"`
-	Rating       float64        `json:"rating"`
-	Year         int64          `json:"year"`
-	Plot_summary sql.NullString `json:"-"`
-}
 
 type MovieDb struct {
 	Conn *sql.DB
@@ -61,15 +54,15 @@ func (c *MovieDb) AllIds() ([]string, error) {
 	return res, nil
 }
 
-func (c *MovieDb) All() ([]Movie, error) {
-	res := []Movie{}
+func (c *MovieDb) All() ([]structs.Movie, error) {
+	res := []structs.Movie{}
 	rows, err := c.Conn.Query("SELECT * FROM movies")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
-		var movie Movie
+		var movie structs.Movie
 		err := rows.Scan(&movie.IMDb_id, &movie.Title, &movie.Rating, &movie.Year, &movie.Plot_summary)
 		res = append(res, movie)
 		if err != nil {
@@ -79,25 +72,25 @@ func (c *MovieDb) All() ([]Movie, error) {
 	return res, nil
 }
 
-func (c *MovieDb) FindOne(id string) (Movie, error) {
+func (c *MovieDb) FindOne(id string) (structs.Movie, error) {
 	row := c.Conn.QueryRow("SELECT * FROM movies WHERE IMDb_id=?", id, 5)
-	movie := Movie{}
+	movie := structs.Movie{}
 	err := row.Scan(&movie.IMDb_id, &movie.Title, &movie.Rating, &movie.Year, &movie.Plot_summary)
 	if err != nil {
-		return Movie{}, err
+		return structs.Movie{}, err
 	}
 	return movie, nil
 }
 
-func (c *MovieDb) Insert(movie Movie) (Movie, error) {
+func (c *MovieDb) Insert(movie structs.Movie) (structs.Movie, error) {
 	res, err := c.Conn.Exec("INSERT INTO movies VALUES(?,?,?,?,?);", movie.IMDb_id, movie.Title, movie.Rating, movie.Year, nil)
 	if err != nil {
-		return Movie{}, err
+		return structs.Movie{}, err
 	}
 
 	_, err = res.RowsAffected()
 	if err != nil {
-		return Movie{}, err
+		return structs.Movie{}, err
 	}
 
 	return movie, nil
@@ -130,11 +123,4 @@ func (c *MovieDb) Delete(id string) error {
 
 	fmt.Println("Movie deleted")
 	return nil
-}
-
-func (movie Movie) PrintInfo() {
-	fmt.Println("IMDb id:", movie.IMDb_id)
-	fmt.Println("Title:", movie.Title)
-	fmt.Println("Rating:", movie.Rating)
-	fmt.Println("Year:", movie.Year)
 }
