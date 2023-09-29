@@ -1,7 +1,6 @@
-package omdbapi
+package connectors
 
 import (
-	"assignment1/movies"
 	"encoding/json"
 	"io"
 	"log"
@@ -68,7 +67,7 @@ func Get(movieId string) (Response, error) {
 	return responseObject, nil
 }
 
-func Worker(movieDb movies.MovieDb, id int, movieId string, results chan<- int) {
+func Worker(movieDb MovieDb, id int, movieId string, results chan<- int) {
 	// fmt.Printf("Worker %d getting summary for %s\n", id, movieId)
 	res, err := Get(movieId)
 	if err != nil {

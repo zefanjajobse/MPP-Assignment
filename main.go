@@ -1,9 +1,8 @@
 package main
 
 import (
-	argumentshandler "assignment1/argumentsHandler"
-	movies "assignment1/movies"
-	restapi "assignment1/restapi"
+	"assignment1/connectors"
+	"assignment1/handlers"
 	"log"
 	"os"
 
@@ -14,17 +13,17 @@ func main() {
 	arguments := os.Args[1:] // The first element is the path to the command, so we can skip that
 
 	const file string = "movies.db"
-	movieDb, err := movies.Connect(file)
+	movieDb, err := connectors.Connect(file)
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	if len(arguments) > 0 {
-		argumentshandler.Start(movieDb, arguments)
+		handlers.StartArguments(movieDb, arguments)
 	} else {
 
-		restapi.Start(movieDb)
+		handlers.StartRestApi(movieDb)
 	}
 
 }

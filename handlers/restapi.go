@@ -1,13 +1,13 @@
-package restapi
+package handlers
 
 import (
-	"assignment1/movies"
+	movies "assignment1/connectors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-func Start(movieDb movies.MovieDb) {
+func StartRestApi(movieDb movies.MovieDb) {
 	router := gin.Default()
 	router.GET("/movies", func(context *gin.Context) {
 		res, err := movieDb.All()

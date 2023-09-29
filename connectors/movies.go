@@ -1,4 +1,4 @@
-package movies
+package connectors
 
 import (
 	"database/sql"

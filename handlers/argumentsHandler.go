@@ -1,14 +1,14 @@
-package argumentshandler
+package handlers
 
 import (
-	"assignment1/movies"
-	omdbapi "assignment1/omdbApi"
+	movies "assignment1/connectors"
+	omdbapi "assignment1/connectors"
 	"flag"
 	"fmt"
 	"log"
 )
 
-func Start(movieDb movies.MovieDb, arguments []string) {
+func StartArguments(movieDb movies.MovieDb, arguments []string) {
 
 	addCommand := flag.NewFlagSet("add", flag.ExitOnError)
 	addImdbId := addCommand.String("imdbid", "tt0000001", "The IMDb ID of a movie or series")
