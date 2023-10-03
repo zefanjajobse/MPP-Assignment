@@ -14,10 +14,6 @@ export function Table() {
     () => Math.ceil(totalCount?.total / limit) | 0,
     [totalCount]
   );
-  const pages = React.useMemo(
-    () => Array.from(Array(pageCount).keys()),
-    [pageCount]
-  );
   const { data, error, isError, isLoading } = useQuery(
     ["movieList", { page }],
     () => MoviesApi.get({ offset: (page - 1) * limit, limit })
