@@ -14,6 +14,7 @@ export function Table() {
     () => Math.ceil(totalCount?.total / limit) | 0,
     [totalCount]
   );
+
   const { data, error, isError, isLoading } = useQuery(
     ["movieList", { page }],
     () => MoviesApi.get({ offset: (page - 1) * limit, limit })
