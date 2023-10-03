@@ -13,17 +13,6 @@ export function Form() {
     (v: { imdb_id: string; title: string; rating: number; year: number }) =>
       MoviesApi.add(v),
     {
-      //   onError: (
-      //     error: React.SetStateAction<{ code: number; message: string }>
-      //   ) => {
-      //     setBanApplyStatus(false);
-      //     setError(error);
-      //     setTimeout(() => setBanApplyStatus(null), 3000);
-      //   },
-      //   onSuccess: () => {
-      //     setBanApplyStatus(null);
-      //     modal.close(null);
-      //   },
       // Always refetch after error or success:
       onSettled: () => {
         queryClient.invalidateQueries(["movieList"]);
