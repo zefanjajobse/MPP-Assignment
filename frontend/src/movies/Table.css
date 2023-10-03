@@ -1,0 +1,22 @@
+.title {
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.table {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 8px
+}
+
+.table table {
+    border-collapse: collapse;
+    width: 100%
+}
+
+.table thead {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    text-align: left;
+}

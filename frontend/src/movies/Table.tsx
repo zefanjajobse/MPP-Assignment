@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { MoviesApi } from "../api/MoviesApi";
+import "./Table.css";
 
 export function Table() {
   const {
@@ -41,45 +42,41 @@ export function Table() {
   );
 
   return (
-    <div style={{ maxHeight: "400px", overflowY: "auto", marginTop: "8px" }}>
-      <table style={{ borderCollapse: "collapse", width: "100%" }}>
-        <thead
-          style={{
-            position: "sticky",
-            top: "0",
-            backgroundColor: "white",
-            textAlign: "left",
-          }}
-        >
-          <tr>
-            <th>imdb_id</th>
-            <th>title</th>
-            <th>rating</th>
-            <th>year</th>
-          </tr>
-        </thead>
-        <tbody>
-          {isError && <>{error}</>}
-          {!isLoading &&
-            !isError &&
-            movieList.map((item, i) => (
-              <tr
-                key={i}
-                ref={movieList.length === i + 1 ? lastElementRef : null}
-              >
-                <td>{item?.imdb_id}</td>
-                <td>{item?.title}</td>
-                <td>{item?.rating}</td>
-                <td>{item?.year}</td>
-              </tr>
-            ))}
-          {isFetching && (
+    <>
+      <h3 className="title">Movies</h3>
+      <div className="table">
+        <table>
+          <thead>
             <tr>
-              <td>loading...</td>
+              <th>imdb_id</th>
+              <th>title</th>
+              <th>rating</th>
+              <th>year</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {isError && <>{error}</>}
+            {!isLoading &&
+              !isError &&
+              movieList.map((item, i) => (
+                <tr
+                  key={i}
+                  ref={movieList.length === i + 1 ? lastElementRef : null}
+                >
+                  <td>{item?.imdb_id}</td>
+                  <td>{item?.title}</td>
+                  <td>{item?.rating}</td>
+                  <td>{item?.year}</td>
+                </tr>
+              ))}
+            {isFetching && (
+              <tr>
+                <td>loading...</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
