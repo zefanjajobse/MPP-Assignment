@@ -42,6 +42,13 @@ function App() {
     [isLoading, hasNextPage]
   );
 
+  // MoviesApi.add({
+  //   imdb_id: "tt0111161",
+  //   title: "The Shawshank Redemption",
+  //   rating: 9.2,
+  //   year: 1994,
+  // });
+
   return (
     <div style={{ maxHeight: "400px", overflowY: "auto", marginTop: "8px" }}>
       <table style={{ borderCollapse: "collapse", width: "100%" }}>

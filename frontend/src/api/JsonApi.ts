@@ -33,7 +33,7 @@ export default class JsonClient {
   }
   postJsonMethod(
     method: string,
-    params: { [name: string]: unknown },
+    params: any,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     const options = {

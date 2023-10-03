@@ -1,16 +1,5 @@
 import JsonClient from "./JsonApi";
-
-export interface IMovieInfo {
-  imdb_id: string;
-  rating: number;
-  title: string;
-  year: number;
-}
-
-export interface IMovies {
-  results: IMovieInfo[];
-  offset: number | null;
-}
+import { IMovies, IMovieInfo } from "./ReturnTypes";
 
 export class ApiProvider extends JsonClient {
   async get({
@@ -29,6 +18,10 @@ export class ApiProvider extends JsonClient {
       results: data,
       offset: offset + limit,
     };
+  }
+
+  async add(movie: IMovieInfo): Promise<IMovieInfo> {
+    return await this.postJsonMethod("movies", movie);
   }
 }
 
