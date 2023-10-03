@@ -29,6 +29,16 @@ func StartRestApi(movieDb movies.MovieDb) {
 
 		context.JSON(http.StatusOK, res)
 	})
+	router.GET("/movies/count", func(context *gin.Context) {
+		res, err := movieDb.Count()
+
+		if err != nil {
+			context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		context.JSON(http.StatusOK, gin.H{"total": res})
+	})
 	router.GET("/movies/:id", func(context *gin.Context) {
 		res, err := movieDb.FindOne(context.Param("id"))
 

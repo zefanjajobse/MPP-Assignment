@@ -77,6 +77,16 @@ func (c *MovieDb) All(pagination structs.Pagination) ([]structs.Movie, error) {
 	return res, nil
 }
 
+func (c *MovieDb) Count() (int, error) {
+	row := c.Conn.QueryRow("SELECT COUNT(*) FROM movies")
+	var count int
+	err := row.Scan(&count)
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
+}
+
 func (c *MovieDb) FindOne(id string) (structs.Movie, error) {
 	row := c.Conn.QueryRow("SELECT * FROM movies WHERE IMDb_id=?", id, 5)
 	movie := structs.Movie{}

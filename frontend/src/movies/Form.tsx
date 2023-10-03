@@ -17,6 +17,7 @@ export function Form() {
       // Always refetch after error or success:
       onSettled: () => {
         queryClient.invalidateQueries(["movieList"]);
+        queryClient.invalidateQueries(["movieCount"]);
       },
     }
   );

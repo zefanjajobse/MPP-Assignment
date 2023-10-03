@@ -9,3 +9,8 @@ export interface IMovies {
   results: IMovieInfo[];
   offset: number | null;
 }
+
+
+export interface ITotalCount {
+  total: number;
+}

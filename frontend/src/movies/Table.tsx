@@ -1,49 +1,71 @@
 import * as React from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { MoviesApi } from "../api/MoviesApi";
 import "./Table.css";
 
 export function Table() {
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetching,
-    isLoading,
-    isError,
-  } = useInfiniteQuery(
-    ["movieList"],
-    ({ pageParam = 0 }) => MoviesApi.get({ pageParam }),
-    {
-      getNextPageParam: (lastPage) => lastPage.offset,
-    }
-  );
+  const limit = 20;
+  const [page, setPage] = React.useState(1);
 
-  const movieList = React.useMemo(
-    () => (data ? data?.pages.flatMap((item) => item.results) : []),
-    [data]
+  const { data: totalCount } = useQuery(["movieCount"], () =>
+    MoviesApi.count()
   );
-
-  const observer = React.useRef<IntersectionObserver>();
-  const lastElementRef = React.useCallback(
-    (node: HTMLDivElement) => {
-      if (isLoading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetching) {
-          fetchNextPage();
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isLoading, hasNextPage]
+  const pageCount = React.useMemo(
+    () => Math.ceil(totalCount?.total / limit) | 0,
+    [totalCount]
+  );
+  const pages = React.useMemo(
+    () => Array.from(Array(pageCount).keys()),
+    [pageCount]
+  );
+  const { data, error, isError, isLoading } = useQuery(
+    ["movieList", { page }],
+    () => MoviesApi.get({ offset: (page - 1) * limit, limit })
   );
 
   return (
     <>
       <h3 className="title">Movies</h3>
+      <div className="center">
+        <button onClick={() => setPage(1)} disabled={page === 1}>
+          First
+        </button>
+        <button
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          Prev
+        </button>
+        <div className="pageSelector">
+          {page > 3 && <button disabled>...</button>}
+          {page > 2 && (
+            <button onClick={() => setPage(page - 2)}>{page - 2}</button>
+          )}
+          {page > 1 && (
+            <button onClick={() => setPage(page - 1)}>{page - 1}</button>
+          )}
+          <button disabled>{page}</button>
+          {page < pageCount && (
+            <button onClick={() => setPage(page + 1)}>{page + 1}</button>
+          )}
+          {page < pageCount - 1 && (
+            <button onClick={() => setPage(page + 2)}>{page + 2}</button>
+          )}
+          {page < pageCount - 2 && <button disabled>...</button>}
+        </div>
+        <button
+          onClick={() => setPage((prev) => Math.min(prev + 1, pageCount))}
+          disabled={page === pageCount}
+        >
+          Next
+        </button>
+        <button
+          onClick={() => setPage(pageCount)}
+          disabled={page === pageCount}
+        >
+          Last
+        </button>
+      </div>
       <div className="table">
         <table>
           <thead>
@@ -58,18 +80,15 @@ export function Table() {
             {isError && <>{error}</>}
             {!isLoading &&
               !isError &&
-              movieList.map((item, i) => (
-                <tr
-                  key={i}
-                  ref={movieList.length === i + 1 ? lastElementRef : null}
-                >
+              data?.results?.map((item, i) => (
+                <tr key={i}>
                   <td>{item?.imdb_id}</td>
                   <td>{item?.title}</td>
                   <td>{item?.rating}</td>
                   <td>{item?.year}</td>
                 </tr>
               ))}
-            {isFetching && (
+            {isLoading && (
               <tr>
                 <td>loading...</td>
               </tr>

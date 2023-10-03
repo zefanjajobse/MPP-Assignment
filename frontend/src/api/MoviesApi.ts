@@ -1,14 +1,14 @@
 import JsonClient from "./JsonApi";
-import { IMovies, IMovieInfo } from "./ReturnTypes";
+import { IMovies, IMovieInfo, ITotalCount } from "./ReturnTypes";
 
 export class ApiProvider extends JsonClient {
   async get({
-    pageParam,
+    offset,
+    limit,
   }: {
-    pageParam: number
+    offset: number
+    limit: number
   }): Promise<IMovies> {
-    const limit = 400;
-    const offset = pageParam ? pageParam - 1 : 0;
     const data = await this.getJsonMethod("movies", {
       Offset: offset,
       Limit: limit,
@@ -18,6 +18,10 @@ export class ApiProvider extends JsonClient {
       results: data,
       offset: offset + limit,
     };
+  }
+
+  async count(): Promise<ITotalCount> {
+    return await this.getJsonMethod("movies/count", {});
   }
 
   async add(movie: IMovieInfo): Promise<IMovieInfo> {

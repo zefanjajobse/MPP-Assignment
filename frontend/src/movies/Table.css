@@ -3,9 +3,13 @@
     text-align: center;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .table {
-    max-height: 400px;
-    overflow-y: auto;
     margin-top: 8px
 }
 
@@ -19,4 +23,11 @@
     top: 0;
     background-color: white;
     text-align: left;
+}
+
+.pageSelector {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
