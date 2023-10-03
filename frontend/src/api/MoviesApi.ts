@@ -17,7 +17,7 @@ export class ApiProvider extends JsonClient {
     pageParam,
   }: {
     pageParam: number
-  }): Promise<any> {
+  }): Promise<IMovies> {
     const limit = 400;
     const offset = pageParam ? pageParam - 1 : 0;
     const data = await this.getJsonMethod("movies", {
