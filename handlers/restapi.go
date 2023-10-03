@@ -5,13 +5,22 @@ import (
 	"assignment1/structs"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func StartRestApi(movieDb movies.MovieDb) {
 	router := gin.Default()
-	router.GET("/movies", func(context *gin.Context) {
-		res, err := movieDb.All()
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowCredentials = true
+	router.Use(cors.New(config))
+	router.GET("/movies", func(context *gin.Context) { // /movies?Offset=10&Limit=10
+		arg := structs.Pagination{}
+		context.ShouldBindQuery(&arg)
+
+		res, err := movieDb.All(arg)
 
 		if err != nil {
 			context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -50,6 +59,5 @@ func StartRestApi(movieDb movies.MovieDb) {
 		movieDb.Delete(movie_id)
 		context.JSON(http.StatusNoContent, gin.H{"deleted": movie_id})
 	})
-
 	router.Run("localhost:8090")
 }

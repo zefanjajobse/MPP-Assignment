@@ -54,9 +54,14 @@ func (c *MovieDb) AllIds() ([]string, error) {
 	return res, nil
 }
 
-func (c *MovieDb) All() ([]structs.Movie, error) {
+func (c *MovieDb) All(pagination structs.Pagination) ([]structs.Movie, error) {
 	res := []structs.Movie{}
-	rows, err := c.Conn.Query("SELECT * FROM movies")
+	query_string := "SELECT * FROM movies ORDER BY IMDb_id"
+	if pagination.Limit > 0 || pagination.Offset > 0 {
+		// + " OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY"
+		query_string += " LIMIT " + fmt.Sprint(pagination.Limit) + " OFFSET " + fmt.Sprint(pagination.Offset)
+	}
+	rows, err := c.Conn.Query(query_string)
 	if err != nil {
 		return nil, err
 	}
