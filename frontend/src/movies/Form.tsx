@@ -48,7 +48,8 @@ export function Form() {
         <input
           value={rating}
           onChange={(e) => setRating(parseInt(e.target.value))}
-          type="text"
+          type="number"
+          step="0.01"
         />
       </label>
       <br />
@@ -57,7 +58,7 @@ export function Form() {
         <input
           value={year}
           onChange={(e) => setYear(parseInt(e.target.value))}
-          type="text"
+          type="number"
         />
       </label>
       <br />
