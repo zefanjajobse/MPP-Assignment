@@ -10,3 +10,5 @@ Ook voor de restapi is er geen extra error checking gedaan naast de minimale eis
 Gebaseerd op feedback alsnog meerdere go bestanden in een bestand kunnen zetten, blijkbaar is het een package per map. Maar nu volgt het dezelfde codeerstyle als een van mijn rust projecten.
 De summary werkt met een max van 25 movies, want dat zou volgens alle movies binnen codegrade moeten zijn en zodat lokaal getest kan worden zonder verdere aanpassingen/het limiet van api aanvragen bereikt wordt. De workers hebben geen limiet gekregen en draaien zodra het kan, met <-result om te wachten tot alle workers klaar zijn. De struct van de omdb api is van de hele response omdat ik deze keer niet vooruit heb gekeken en hoop dat het gebruikt wordt.
 Error checking is hier het minimale aangezien het niet nodig is voor de opdracht.
+
+Heb voor het eerst github copilot gebruikt voor hulp in de implementatie van het systeem (pageselector).

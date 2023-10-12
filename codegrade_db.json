@@ -1,0 +1,262 @@
+[
+  {
+    "imdb_id": "tt0029583",
+    "title": "Snow White and the Seven Dwarfs",
+    "rating": 7.6,
+    "year": 1937
+  },
+  { "imdb_id": "tt0032455", "title": "Fantasia", "rating": 7.7, "year": 1940 },
+  { "imdb_id": "tt0032910", "title": "Pinocchio", "rating": 7.5, "year": 1940 },
+  {
+    "imdb_id": "tt0033467",
+    "title": "Citizen Kane",
+    "rating": 8.3,
+    "year": 1941
+  },
+  { "imdb_id": "tt0033563", "title": "Dumbo", "rating": 7.2, "year": 1941 },
+  { "imdb_id": "tt0034492", "title": "Bambi", "rating": 7.3, "year": 1942 },
+  {
+    "imdb_id": "tt0034583",
+    "title": "Casablanca",
+    "rating": 8.5,
+    "year": 1942
+  },
+  {
+    "imdb_id": "tt0042332",
+    "title": "Cinderella",
+    "rating": 7.3,
+    "year": 1950
+  },
+  {
+    "imdb_id": "tt0043456",
+    "title": "The Day the Earth Stood Still",
+    "rating": 7.8,
+    "year": 1951
+  },
+  { "imdb_id": "tt0046183", "title": "Peter Pan", "rating": 7.3, "year": 1953 },
+  {
+    "imdb_id": "tt0046889",
+    "title": "The Dam Busters",
+    "rating": 7.4,
+    "year": 1955
+  },
+  {
+    "imdb_id": "tt0048280",
+    "title": "Lady and the Tramp",
+    "rating": 7.3,
+    "year": 1955
+  },
+  {
+    "imdb_id": "tt0050083",
+    "title": "12 Angry Men",
+    "rating": 9,
+    "year": 1957
+  },
+  {
+    "imdb_id": "tt0050212",
+    "title": "The Bridge on the River Kwai",
+    "rating": 8.2,
+    "year": 1957
+  },
+  {
+    "imdb_id": "tt0050825",
+    "title": "Paths of Glory",
+    "rating": 8.4,
+    "year": 1957
+  },
+  { "imdb_id": "tt0052618", "title": "Ben-Hur", "rating": 8.1, "year": 1959 },
+  {
+    "imdb_id": "tt0053125",
+    "title": "North by Northwest",
+    "rating": 8.3,
+    "year": 1959
+  },
+  {
+    "imdb_id": "tt0053285",
+    "title": "Sleeping Beauty",
+    "rating": 7.2,
+    "year": 1959
+  },
+  {
+    "imdb_id": "tt0054047",
+    "title": "The Magnificent Seven",
+    "rating": 7.7,
+    "year": 1960
+  },
+  { "imdb_id": "tt0054331", "title": "Spartacus", "rating": 7.9, "year": 1960 },
+  {
+    "imdb_id": "tt0054953",
+    "title": "The Guns of Navarone",
+    "rating": 7.5,
+    "year": 1961
+  },
+  {
+    "imdb_id": "tt0055254",
+    "title": "One Hundred and One Dalmatians",
+    "rating": 7.3,
+    "year": 1961
+  },
+  { "imdb_id": "tt0055928", "title": "Dr. No", "rating": 7.2, "year": 1962 },
+  {
+    "imdb_id": "tt0056172",
+    "title": "Lawrence of Arabia",
+    "rating": 8.3,
+    "year": 1962
+  },
+  {
+    "imdb_id": "tt0056197",
+    "title": "The Longest Day",
+    "rating": 7.7,
+    "year": 1962
+  },
+  {
+    "imdb_id": "tt0057012",
+    "title": "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb",
+    "rating": 8.4,
+    "year": 1964
+  },
+  {
+    "imdb_id": "tt0057076",
+    "title": "From Russia with Love",
+    "rating": 7.4,
+    "year": 1963
+  },
+  {
+    "imdb_id": "tt0057115",
+    "title": "The Great Escape",
+    "rating": 8.2,
+    "year": 1963
+  },
+  {
+    "imdb_id": "tt0058150",
+    "title": "Goldfinger",
+    "rating": 7.7,
+    "year": 1964
+  },
+  {
+    "imdb_id": "tt0058461",
+    "title": "Per un pugno di dollari",
+    "rating": 7.9,
+    "year": 1964
+  },
+  {
+    "imdb_id": "tt0059113",
+    "title": "Doctor Zhivago",
+    "rating": 7.9,
+    "year": 1965
+  },
+  {
+    "imdb_id": "tt0059578",
+    "title": "Per qualche dollaro in più",
+    "rating": 8.2,
+    "year": 1965
+  },
+  {
+    "imdb_id": "tt0059742",
+    "title": "The Sound of Music",
+    "rating": 8.1,
+    "year": 1965
+  },
+  {
+    "imdb_id": "tt0059800",
+    "title": "Thunderball",
+    "rating": 6.9,
+    "year": 1965
+  },
+  {
+    "imdb_id": "tt0060196",
+    "title": "Il buono, il brutto, il cattivo",
+    "rating": 8.8,
+    "year": 1966
+  },
+  {
+    "imdb_id": "tt0061852",
+    "title": "The Jungle Book",
+    "rating": 7.6,
+    "year": 1967
+  },
+  {
+    "imdb_id": "tt0062512",
+    "title": "You Only Live Twice",
+    "rating": 6.8,
+    "year": 1967
+  },
+  {
+    "imdb_id": "tt0062622",
+    "title": "2001: A Space Odyssey",
+    "rating": 8.3,
+    "year": 1968
+  },
+  {
+    "imdb_id": "tt0064072",
+    "title": "Battle of Britain",
+    "rating": 6.9,
+    "year": 1969
+  },
+  {
+    "imdb_id": "tt0064115",
+    "title": "Butch Cassidy and the Sundance Kid",
+    "rating": 8,
+    "year": 1969
+  },
+  {
+    "imdb_id": "tt0064116",
+    "title": "C'era una volta il West",
+    "rating": 8.5,
+    "year": 1968
+  },
+  {
+    "imdb_id": "tt0064757",
+    "title": "On Her Majesty's Secret Service",
+    "rating": 6.8,
+    "year": 1969
+  },
+  {
+    "imdb_id": "tt0065214",
+    "title": "The Wild Bunch",
+    "rating": 7.9,
+    "year": 1969
+  },
+  {
+    "imdb_id": "tt0065421",
+    "title": "The AristoCats",
+    "rating": 7.1,
+    "year": 1970
+  },
+  {
+    "imdb_id": "tt0066473",
+    "title": "Tora! Tora! Tora!",
+    "rating": 7.5,
+    "year": 1970
+  },
+  {
+    "imdb_id": "tt0066765",
+    "title": "And Now for Something Completely Different",
+    "rating": 7.5,
+    "year": 1971
+  },
+  {
+    "imdb_id": "tt0066769",
+    "title": "The Andromeda Strain",
+    "rating": 7.2,
+    "year": 1971
+  },
+  {
+    "imdb_id": "tt0066995",
+    "title": "Diamonds Are Forever",
+    "rating": 6.5,
+    "year": 1971
+  },
+  {
+    "imdb_id": "tt0068646",
+    "title": "The Godfather",
+    "rating": 9.2,
+    "year": 1972
+  },
+  {
+    "imdb_id": "tt0069113",
+    "title": "The Poseidon Adventure",
+    "rating": 7.1,
+    "year": 1972
+  }
+]

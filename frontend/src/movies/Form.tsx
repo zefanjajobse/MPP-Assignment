@@ -48,7 +48,7 @@ export function Form() {
           />
           <input
             value={rating}
-            onChange={(e) => setRating(parseInt(e.target.value))}
+            onChange={(e) => setRating(parseFloat(e.target.value))}
             type="number"
             step="0.01"
           />

@@ -47,7 +47,7 @@ func StartArguments(movieDb movies.MovieDb, arguments []string) {
 	case "summaries":
 		res, err := movieDb.AllIds()
 		checkError(err)
-		usedResults := res[:25]
+		usedResults := res[:50]
 
 		numJobs := len(usedResults)
 		results := make(chan int, numJobs)
