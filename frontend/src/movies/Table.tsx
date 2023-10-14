@@ -1,7 +1,8 @@
 import * as React from "react";
-import { useQuery } from "@tanstack/react-query";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import { MoviesApi } from "../api/MoviesApi";
 import "./Table.css";
+import { IMovies } from "../api/ReturnTypes";
 
 export function Table() {
   const limit = 20;
@@ -15,10 +16,10 @@ export function Table() {
     [totalCount]
   );
 
-  const { data, error, isError, isLoading } = useQuery(
-    ["movieList", { page }],
-    () => MoviesApi.get({ offset: (page - 1) * limit, limit })
-  );
+  const { data, error, isError, isLoading }: UseQueryResult<IMovies, any> =
+    useQuery(["movieList", { page }], () =>
+      MoviesApi.get({ offset: (page - 1) * limit, limit })
+    );
 
   return (
     <>
@@ -74,17 +75,22 @@ export function Table() {
             </tr>
           </thead>
           <tbody>
-            {isError && <>{error}</>}
-            {!isLoading &&
-              !isError &&
-              data?.results?.map((item, i) => (
-                <tr key={i}>
-                  <td>{item?.imdb_id}</td>
-                  <td>{item?.title}</td>
-                  <td>{item?.rating}</td>
-                  <td>{item?.year}</td>
-                </tr>
-              ))}
+            {isError && (
+              <tr>
+                <td>Something went wrong...</td>
+                <td>{error?.error?.message?.message}</td>
+                <th>N/A</th>
+                <th>N/A</th>
+              </tr>
+            )}
+            {data?.results?.map((item, i) => (
+              <tr key={i}>
+                <td>{item?.imdb_id}</td>
+                <td>{item?.title}</td>
+                <td>{item?.rating}</td>
+                <td>{item?.year}</td>
+              </tr>
+            ))}
             {isLoading && (
               <tr>
                 <td>loading...</td>
