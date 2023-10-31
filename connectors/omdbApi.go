@@ -12,7 +12,7 @@ import (
 func Get(movieId string) (structs.Response, error) {
 	queryParams := url.Values{
 		"i":      {movieId},
-		"apikey": {"9b2fb0"},
+		"apikey": {"APIKEY"},
 	}
 	response, err := http.Get("http://www.omdbapi.com/?" + queryParams.Encode())
 	if err != nil {
